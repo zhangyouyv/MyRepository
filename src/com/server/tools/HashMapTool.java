@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 服务器存储类管理工具 对外提供统一的接口
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class HashMapTool {

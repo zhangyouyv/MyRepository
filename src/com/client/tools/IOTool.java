@@ -9,7 +9,7 @@ import java.io.PrintStream;
 /**
  * 用于管理客户端的输入输出系统
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class IOTool {

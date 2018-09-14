@@ -8,7 +8,7 @@ import javafx.scene.layout.Border;
 
 /**
  * 功能区，包括一个玩家列表JPanel和一个消息发送的JPanel
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class FunctionPanel extends JPanel{

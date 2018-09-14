@@ -12,7 +12,7 @@ import com.client.ui.PlayerPanel;
 import com.client.ui.StatusPanel;
 /**
  * “不下了”按钮的监听事件
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class EscapeListener implements ActionListener{

@@ -2,7 +2,7 @@ package com.client.listener;
 
 /**
  * 客户端列表监听器 双击选择玩家
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 import java.awt.event.MouseAdapter;
@@ -25,10 +25,17 @@ public class ListListener extends MouseAdapter {
 						int index = list.locationToIndex(e.getPoint());
 						String opponentID = (String) list.getModel().getElementAt(index); // 获取内容
 						// 不能和自己对战
-						if (opponentID.equals(GameData.myID)) {
+						if(GameData.chosenOpponentID.contains("(")){
+							if (GameData.chosenOpponentID.substring(0, GameData.chosenOpponentID.indexOf("(")).equals(GameData.myID)) {
+								JOptionPane.showConfirmDialog(null, "不能和自己对战！", "对战错误", JOptionPane.DEFAULT_OPTION,
+										JOptionPane.ERROR_MESSAGE);
+							}
+							}
+						else if (opponentID.equals(GameData.myID)) {
 							JOptionPane.showConfirmDialog(null, "不能和自己对战！", "对战错误", JOptionPane.DEFAULT_OPTION,
 									JOptionPane.ERROR_MESSAGE);
 						}
+						
 						// 选择
 						else {
 							String message = "CHALL:" + GameData.myID + "#" + opponentID;

@@ -11,7 +11,7 @@ import com.client.gamedata.GameData;
 /**
  * 五子棋游戏客户端
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class ClientFrame extends JFrame {
@@ -30,8 +30,8 @@ public class ClientFrame extends JFrame {
 	public ClientFrame() {
 		this.setTitle("五子棋对战客户端");
 		this.setSize(GameData.FrameWidth, GameData.FrameHeight);
-		this.setLocation(100, 100);
-		this.setResizable(false);
+		this.setLocation(50, 10);
+		this.setResizable(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// 添加面板组件

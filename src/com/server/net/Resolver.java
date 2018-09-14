@@ -16,7 +16,7 @@ import com.server.tools.Player;
 /**
  * 服务器游戏协议解析器 只对收到的String进行处理
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class Resolver {

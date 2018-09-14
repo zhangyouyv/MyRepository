@@ -8,7 +8,7 @@ import com.client.tools.IOTool;
 /**
  * 循环接收服务器的消息
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class ClientThread implements Runnable {

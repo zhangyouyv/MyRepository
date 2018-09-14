@@ -10,7 +10,7 @@ import com.server.ui.ServerFrame;
 
 /**
  * 启动运行服务端
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class LaunchServer {

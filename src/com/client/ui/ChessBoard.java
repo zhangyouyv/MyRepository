@@ -83,7 +83,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 		super.paintComponent(g); // 暂时不知道为什么要这样写
 
 		Toolkit tool = this.getToolkit();
-		Image image = tool.getImage(".\\Background\\image8.jpg");
+		Image image = tool.getImage(".\\Background\\image4.jpg");
 		g.drawImage(image, 0, 0, chessBoard.getWidth(), chessBoard.getHeight(), 0, 0, image.getWidth(this),
 				image.getHeight(this), this);
 

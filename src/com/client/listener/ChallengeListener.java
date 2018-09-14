@@ -21,7 +21,8 @@ public class ChallengeListener implements ActionListener {
 						JOptionPane.DEFAULT_OPTION);
 			} 
 			else {
-				if (GameData.chosenOpponentID.equals(GameData.myID)) {
+				if (GameData.chosenOpponentID.equals(GameData.myID) | GameData.chosenOpponentID.substring(0, GameData.chosenOpponentID.indexOf("(")).equals(GameData.myID)) {
+					System.out.println(GameData.chosenOpponentID);
 					JOptionPane.showConfirmDialog(null, "不能和自己对战！", "对战错误", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.ERROR_MESSAGE);
 				} 

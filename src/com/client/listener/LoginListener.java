@@ -16,7 +16,7 @@ import com.client.ui.LoginPanel;
 import com.client.ui.StatusPanel;
 /**
  * ¿Í»§¶ËµÇÂ¼°´Å¥¼àÌýÆ÷
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class LoginListener implements ActionListener {

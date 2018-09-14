@@ -16,7 +16,7 @@ import javafx.scene.layout.Border;
 /**
  * 
  * 服务器端的消息显示界面，显示服务器的更新消息
- * @author Mr.Bubbles
+ * @author Edward
  */
 public class MessagePanel extends JPanel{
 	private static MessagePanel messagePanel = null;

@@ -10,20 +10,18 @@ import com.client.tools.ListTool;
 import com.client.ui.ClientFrame;
 
 /**
- * Æô¶¯Îå×ÓÆåÁªÍøÓÎÏ· 
- * @author Mr.Bubbles  
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï· 
+ * @author Mr.Edward 
  * 
  */
 public class StartGame {
 	public static void main(String[] args){
-		//Ì×ÓÃĞÂµÄ½çÃæ¿ò¼Ü
 		try {
 			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
 			org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 			UIManager.put("RootPane.setupButtonVisible", false);
 		} catch (Exception e) {
 		}
-		//×ÖÌåÉèÖÃ
 		String[] DEFAULT_FONT  = new String[]{
 			    "Table.font"
 			    ,"TableHeader.font"
@@ -59,7 +57,6 @@ public class StartGame {
 			    ,"TitledBorder.font"
 			    ,"ComboBox.font"
 			};
-			// µ÷ÕûÄ¬ÈÏ×ÖÌå
 			for (int i = 0; i < DEFAULT_FONT.length; i++)
 			    UIManager.put(DEFAULT_FONT[i],new Font("Î¢ÈíÑÅºÚ", Font.PLAIN,14));
 		ListTool.getInstance().addPlayer("Waiting for players...");

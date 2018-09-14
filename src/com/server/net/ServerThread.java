@@ -8,7 +8,7 @@ import java.net.Socket;
 /**
  * 对于每个客户端的处理线程
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class ServerThread implements Runnable {

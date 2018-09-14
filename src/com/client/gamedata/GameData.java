@@ -7,7 +7,7 @@ import com.client.ui.ChessBoard;
 /**
  * ´æ´¢ÓÎÏ·Êı¾İ
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class GameData {

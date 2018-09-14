@@ -17,7 +17,7 @@ import com.client.ui.StatusPanel;
 /**
  * 客户端的协议解析器 对于本地产生的请求或者是服务器请求作出解析
  * 
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class Resolver {
@@ -40,6 +40,9 @@ public class Resolver {
 			ListTool.getInstance().removePlayer();
 			String[] playerList = content.split("#");
 			for (int i = 0; i < playerList.length; i++) {
+				if(playerList[i].equals(GameData.myID)){
+					playerList[i] = playerList[i]+"(本机请勿匹配)";
+				}
 				ListTool.getInstance().addPlayer(playerList[i]);
 			}
 		}

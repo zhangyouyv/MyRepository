@@ -19,7 +19,7 @@ import com.client.tools.ListTool;
  * 包含一个Jlist显示玩家，两个按钮分别为“挑战他”，和“不下了”
  * 可以动态刷新在线玩家
  * 点击玩家可以进行对战
- * @author Mr.Bubbles
+ * @author Edward
  *
  */
 public class PlayerPanel extends JPanel {
@@ -29,7 +29,7 @@ public class PlayerPanel extends JPanel {
 	private JScrollPane playerPane=new JScrollPane();
 	private JList<String> playerList=ListTool.getPlayerList();
 	
-	private JButton challengeBtn=new JButton("挑战他");
+	private JButton challengeBtn=new JButton("邀请玩家对战");
 	private JButton escapeBtn=new JButton("不下了");
 	private JButton flushBtn=new JButton("刷新");
 	private JPanel buttonBar=new JPanel();
