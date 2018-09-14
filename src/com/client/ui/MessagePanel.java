@@ -26,7 +26,7 @@ public class MessagePanel extends JPanel {
 	private JScrollPane messagePane=new JScrollPane();
 	private JTextArea messageArea=MessageTool.getMessageArea();
 	private JTextField sendField=new JTextField(33);
-	private JButton sendBtn=new JButton("Send");
+	private JButton sendBtn=new JButton("发送");
 	private JPanel sendPanel=new JPanel(new FlowLayout());
 	//单例模式
 	public static MessagePanel getInstance(){

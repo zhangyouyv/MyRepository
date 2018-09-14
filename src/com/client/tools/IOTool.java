@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 用于管理客户端的输入输出系统
@@ -33,10 +34,20 @@ public class IOTool {
 	}
 
 	public void setWriter(OutputStream out) {  //使用原始输入输出流进行构造
-		this.writer = new PrintStream(out,true);
+		try {
+			this.writer = new PrintStream(out,true,"GBK");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 	}
 
 	public void setReader(InputStream in) {
-		this.reader = new BufferedReader(new InputStreamReader(in));
+		try {
+			this.reader = new BufferedReader(new InputStreamReader(in,"GBK"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -59,7 +59,7 @@ public class StartGame {
 			};
 			for (int i = 0; i < DEFAULT_FONT.length; i++)
 			    UIManager.put(DEFAULT_FONT[i],new Font("微软雅黑", Font.PLAIN,14));
-		ListTool.getInstance().addPlayer("Waiting for players...");
+		ListTool.getInstance().addPlayer("等待玩家加入...");
 		ClientFrame.getInstance();
 	}
 }

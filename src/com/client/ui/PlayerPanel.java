@@ -43,7 +43,7 @@ public class PlayerPanel extends JPanel {
 	
 	private PlayerPanel(){  //制作布局
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder("玩家列表"));  //添加边框
+		setBorder(BorderFactory.createTitledBorder("在线玩家列表"));  //添加边框
 		add(playerPane,BorderLayout.CENTER);
 		add(buttonBar,BorderLayout.SOUTH);
 		playerList.addMouseListener(new ListListener());
