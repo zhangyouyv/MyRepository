@@ -12,6 +12,17 @@ public class StatusPanel extends JPanel {
 	private static StatusPanel statusPanel = null;
 	private JButton resetBtn = new JButton("重来");
 	private JLabel statusLbl = new JLabel("当前状态：未登录");
+	/*private JLabel whoseturn = new JLabel("落子标识");
+	public JLabel getWhoseturn() {
+		return whoseturn;
+	}
+	public void setWhoseturnforOwn() {
+		whoseturn.setText("该您落子了");
+	}
+	public void setWhoseturnforOther() {
+		whoseturn.setText("该对手落子了");
+	}*/
+	
 	private JLabel myID= new JLabel("                       您的ID：登录获取ID");
 
 	public static StatusPanel getInstance() {
@@ -44,6 +55,7 @@ public class StatusPanel extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.add(resetBtn,BorderLayout.EAST);
 		this.add(statusLbl,BorderLayout.WEST);
+		/*this.add(whoseturn,BorderLayout.NORTH);*/
 		this.add(myID, BorderLayout.CENTER);
 		resetBtn.setEnabled(false);
 		resetBtn.addActionListener(new ResetListener());

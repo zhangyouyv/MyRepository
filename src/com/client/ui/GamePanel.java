@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 /**
  * 游戏JPanel，包括一个设置服务器IP和端口的JPanel以及棋盘JPanel
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class GamePanel extends JPanel {

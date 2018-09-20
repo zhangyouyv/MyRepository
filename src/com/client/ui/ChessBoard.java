@@ -82,6 +82,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 		super.paintComponent(g); // 暂时不知道为什么要这样写
 
 		Toolkit tool = this.getToolkit();
+		//获取背景图片，路径问题
 		Image image = tool.getImage(".\\Background\\image4.jpg");
 		g.drawImage(image, 0, 0, chessBoard.getWidth(), chessBoard.getHeight(), 0, 0, image.getWidth(this),
 				image.getHeight(this), this);
@@ -152,7 +153,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 			// 重来按钮可用
 			StatusPanel.getInstance().setResetStatusValid();
 			PlayerPanel.getInstance().setEscapeEnabledInvalid();
-
+			GameData.Reset();
 		}
 		// currentChessColor = currentChessColor == Color.BLACK ? Color.white :
 		// Color.black; // 反色

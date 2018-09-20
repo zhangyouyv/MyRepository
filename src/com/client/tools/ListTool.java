@@ -6,7 +6,7 @@ import javax.swing.JList;
 /**
  * 玩家列表的显示管理类 包含一个JList和ListModel，以及一系列操纵的方法
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class ListTool {

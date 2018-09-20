@@ -13,11 +13,11 @@ public class LoginPanel extends JPanel {
 	
 	private static LoginPanel loginpanel = null;
 
-	private JLabel opIP_lbl=new JLabel("Server IP:");
-	private JLabel opPort_lbl=new JLabel("Server Port:");
+	private JLabel opIP_lbl=new JLabel("           服务端 IP:");
+	private JLabel opPort_lbl=new JLabel("           服务 Port:");
 	private static JTextField opIP_jtf =new JTextField("127.0.0.1");
-	private static JTextField opPort_jtf =new JTextField("6666");
-	private JButton login_btn = new JButton("Login");
+	private static JLabel opPort_jtf =new JLabel("6666");
+	private JButton login_btn = new JButton("登录");
 
 	private LoginPanel() {
 		
@@ -43,9 +43,9 @@ public class LoginPanel extends JPanel {
 		return opIP_jtf;
 	}
 	
-	public static JTextField getOpPort(){	//获取端口，这两个可以修改成为返回String即可
+	public static JLabel getOpPort(){	//获取端口，这两个可以修改成为返回String即可
 		if(opPort_jtf==null)
-			opPort_jtf=new JTextField("127.0.0.1");
+			opPort_jtf=new JLabel("127.0.0.1");
 		return opPort_jtf;
 	}
 

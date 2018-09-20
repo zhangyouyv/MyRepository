@@ -19,7 +19,7 @@ import com.client.tools.ListTool;
  * 包含一个Jlist显示玩家，两个按钮分别为“挑战他”，和“不下了”
  * 可以动态刷新在线玩家
  * 点击玩家可以进行对战
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class PlayerPanel extends JPanel {

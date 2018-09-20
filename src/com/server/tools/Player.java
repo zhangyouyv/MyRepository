@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * 玩家类 包括玩家的基本信息和每个玩家所有的Socket
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class Player {

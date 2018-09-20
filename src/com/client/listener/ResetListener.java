@@ -9,7 +9,7 @@ import com.client.gamedata.GameData;
 import com.client.ui.ChessBoard;
 /**
  * 重来按钮的监听事件
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class ResetListener implements ActionListener{

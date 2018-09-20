@@ -4,7 +4,7 @@ import javax.swing.JTextArea;
 
 /**
  * JTextArea的包装类，便于多个类进行调用
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class MessageTool {

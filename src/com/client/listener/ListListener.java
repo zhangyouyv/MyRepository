@@ -2,11 +2,14 @@ package com.client.listener;
 
 /**
  * 客户端列表监听器 双击选择玩家
- * @author Edward
+ * @author Edward Zhang
  *
  */
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -14,10 +17,13 @@ import javax.swing.JOptionPane;
 import com.client.gamedata.GameData;
 import com.client.tools.IOTool;
 import com.client.tools.ListTool;
+import com.server.tools.HashMapTool;
+import com.server.tools.Player;
 
 public class ListListener extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		if (GameData.isConnected){
+			HashMap playerMap = HashMapTool.getInstance().getBattleMap();
 			if (GameData.opponentID.equals("")) {
 				if (!ListTool.getInstance().getPlayerList().isSelectionEmpty()) { // 不是空白
 					if (e.getClickCount() == 2) {
@@ -35,6 +41,12 @@ public class ListListener extends MouseAdapter {
 							JOptionPane.showConfirmDialog(null, "不能和自己对战！", "对战错误", JOptionPane.DEFAULT_OPTION,
 									JOptionPane.ERROR_MESSAGE);
 						}
+						
+						//不能匹配到正在对战的玩家
+						else 
+						    if(HashMapTool.getInstance().getPlayer(GameData.chosenOpponentID).getStatus() == true){
+								   JOptionPane.showConfirmDialog(null, "对手正在游戏，不能匹配新的玩家！", "游戏中请勿匹配", JOptionPane.DEFAULT_OPTION,
+										JOptionPane.ERROR_MESSAGE);}
 						
 						// 选择
 						else {
@@ -54,7 +66,7 @@ public class ListListener extends MouseAdapter {
 				}
 			}
 			//游戏没有结束，不能匹配玩家
-			else if(!GameData.opponentID.equals("")&&GameData.gameOver==false){
+			else if(!GameData.opponentID.equals("")&&GameData.gameOver==false&&e.getClickCount() == 2&&!ListTool.getInstance().getPlayerList().isSelectionEmpty()){
 				JOptionPane.showConfirmDialog(null, "当前正在游戏，不能匹配新的玩家！", "游戏中请勿匹配", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.ERROR_MESSAGE);
 			}

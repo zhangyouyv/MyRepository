@@ -12,7 +12,7 @@ import com.client.ui.PlayerPanel;
 import com.client.ui.StatusPanel;
 /**
  * “不下了”按钮的监听事件
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class EscapeListener implements ActionListener{
@@ -37,6 +37,7 @@ public class EscapeListener implements ActionListener{
 				IOTool.getInstance().getWriter().println("LOSE:"+GameData.myID+"#"+GameData.opponentID);
 				PlayerPanel.getInstance().setEscapeEnabledInvalid();
 				StatusPanel.getInstance().setResetStatusValid();
+				GameData.Reset();
 			}
 			else if(choice==JOptionPane.NO_OPTION){
 				//不做动作

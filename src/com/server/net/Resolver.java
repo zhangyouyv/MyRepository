@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.client.gamedata.GameData;
 import com.client.tools.ListTool;
 import com.server.tools.HashMapTool;
 import com.server.tools.MessageTool;
@@ -16,7 +17,7 @@ import com.server.tools.Player;
 /**
  * 服务器游戏协议解析器 只对收到的String进行处理
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class Resolver {
@@ -103,6 +104,12 @@ public class Resolver {
 				String[] IDSet=content.split("#");
 				String toID=IDSet[1];
 				sendMessage(content.split("#")[2], toID);
+				flushPlayerList();
+			}
+			else if(header.equals("LEAVE")){
+				String[] IDSet=content.split("#");
+				String toID=IDSet[1];
+				sendLeave(content.split("#")[2], toID);
 				flushPlayerList();
 			}
 			
@@ -196,6 +203,11 @@ public class Resolver {
 	public void sendLose(String message,String toID){
 		HashMapTool.getInstance().getPlayer(toID).getWriter().println("LOSE:"+message);
 	}
+	//通知toID对方异常退出
+		public void sendLeave(String message,String toID){
+			HashMapTool.getInstance().getPlayer(toID).getWriter().println("LEAVE:"+message);
+			ListTool.getInstance().dropPlayer(GameData.myID);
+		}
 	//消息发送
 	public void sendMessage(String message,String toID){
 		HashMapTool.getInstance().getPlayer(toID).getWriter().println("SAY:"+message);

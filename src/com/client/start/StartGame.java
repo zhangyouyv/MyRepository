@@ -11,7 +11,7 @@ import com.client.ui.ClientFrame;
 
 /**
  * ����������������Ϸ 
- * @author Mr.Edward 
+ * @author Mr.Edward Zhang 
  * 
  */
 public class StartGame {

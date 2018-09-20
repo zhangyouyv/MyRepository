@@ -16,7 +16,7 @@ import com.client.tools.MessageTool;
  * 消息传输面板，可以用于传输文本消息
  * 包含一个JTextArea和一个JTextField还有发送的JButton
  * 可以在线收发消息
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class MessagePanel extends JPanel {

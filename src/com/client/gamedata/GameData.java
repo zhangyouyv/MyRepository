@@ -7,7 +7,7 @@ import com.client.ui.ChessBoard;
 /**
  * ´æ´¢ÓÎÏ·Êı¾İ
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class GameData {

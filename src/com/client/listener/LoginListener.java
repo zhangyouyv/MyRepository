@@ -16,7 +16,7 @@ import com.client.ui.LoginPanel;
 import com.client.ui.StatusPanel;
 /**
  * 客户端登录按钮监听器
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class LoginListener implements ActionListener {
@@ -53,6 +53,8 @@ public class LoginListener implements ActionListener {
 //				ClientFrame.getInstance().setTitle(GameData.myID);
 				StatusPanel.getInstance().setID(GameData.myID);
 				IOTool.getInstance().getWriter().println("HELLO:" + GameData.myID);
+				
+				
 
 			} catch (UnknownHostException e1) { // 连接失败的时候处理
 				JOptionPane.showConfirmDialog(null, "服务器未开启", "连接错误", JOptionPane.DEFAULT_OPTION,

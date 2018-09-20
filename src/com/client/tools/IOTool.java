@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * 用于管理客户端的输入输出系统
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class IOTool {
@@ -35,6 +35,7 @@ public class IOTool {
 
 	public void setWriter(OutputStream out) {  //使用原始输入输出流进行构造
 		try {
+			//流规范字符集操作
 			this.writer = new PrintStream(out,true,"GBK");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -44,6 +45,7 @@ public class IOTool {
 
 	public void setReader(InputStream in) {
 		try {
+			//流规范字符集操作
 			this.reader = new BufferedReader(new InputStreamReader(in,"GBK"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

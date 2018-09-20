@@ -2,28 +2,31 @@ package com.client.net;
 
 import java.awt.Color;
 
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import com.client.gamedata.GameData;
+import com.client.listener.FlushListener;
 import com.client.tools.IOTool;
 import com.client.tools.ListTool;
 import com.client.tools.MessageTool;
 import com.client.ui.ChessBoard;
 import com.client.ui.ChessPoint;
+import com.client.ui.ClientFrame;
 import com.client.ui.MessagePanel;
 import com.client.ui.PlayerPanel;
 import com.client.ui.StatusPanel;
+import com.server.tools.HashMapTool;
 
 /**
  * 客户端的协议解析器 对于本地产生的请求或者是服务器请求作出解析
  * 
- * @author Edward
+ * @author Edward Zhang
  *
  */
 public class Resolver {
 
 	private String message = null;
-
 	public Resolver(String message) {
 		this.message = message;
 	}
@@ -34,7 +37,13 @@ public class Resolver {
 		// System.out.println(message);
 		String header = messageSplit[0];
 		String content = messageSplit[1];
-		
+		//服务器关闭客户端提示
+		if(header.equals("ERROR")){
+			JOptionPane.showConfirmDialog(null,"连接服务器错误，请检查网络",
+				     "连接错误",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
+			GameData.isConnected = false;
+			ClientFrame.getInstance().dispose();
+		}
 		//接收列表
 		if (header.equals("LIST")) { 		
 			ListTool.getInstance().removePlayer();
@@ -55,13 +64,15 @@ public class Resolver {
 				GameData.hasOpponent=true;
 				GameData.opponentID=fromID;
 				IOTool.getInstance().getWriter().println("YESCHALL:"+GameData.myID+"#"+fromID);
+				/*HashMapTool.getInstance().addPlayer(GameData.myID, player);
+				HashMapTool.getInstance().addPlayer(GameData.fromID, player);*/
 				PlayerPanel.getInstance().setEscapeEnabledValid();
 			}
 			//不同意对战
 			else if(choice==JOptionPane.NO_OPTION){
 				IOTool.getInstance().getWriter().println("NOCHALL:"+GameData.myID+"#"+fromID);
 			}
-		}
+			}
 		//对方同意对战
 		else if(header.equals("YESCHALL")){
 			GameData.hasOpponent=true;
@@ -89,25 +100,17 @@ public class Resolver {
 			GameData.myColor= (GameData.isBlack)?Color.black:Color.WHITE;
 			MessageTool.getInstance().addMessage("游戏开始，等待对方落子……");
 		}
-		//轮到我方行动
-		else if(header.equals("YOURTURN")){
-			GameData.myTurn=true;
-			MessageTool.getInstance().addMessage("请您落子...");
-			//获取棋子位置并且加入
-			String[] position=content.split("#");
-			int currentX=Integer.parseInt(position[2]);
-			int currentY=Integer.parseInt(position[3]);
-			ChessBoard.cp[ChessBoard.chessCount++] = new ChessPoint(currentX, currentY, (GameData.isBlack)?Color.WHITE:Color.black);
-			ChessBoard.getInstance().repaint();
-		}
+		
 		//对方发来胜利标识，我方失败
 		else if(header.equals("WIN")){
 			GameData.gameOver=true;
 			MessageTool.getInstance().addMessage("请点击重来结束本局！");
 			JOptionPane.showConfirmDialog(null,"你输了",
 				     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
+			GameData.Reset();
 			StatusPanel.getInstance().setResetStatusValid();
 			PlayerPanel.getInstance().setEscapeEnabledInvalid();
+			
 		}
 		//对方发来失败标识，我方胜利
 		else if(header.equals("LOSE")){
@@ -117,10 +120,32 @@ public class Resolver {
 				     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
 			StatusPanel.getInstance().setResetStatusValid();
 			PlayerPanel.getInstance().setEscapeEnabledInvalid();
+			GameData.Reset();
 		}
+		//轮到我方行动
+				else if(header.equals("YOURTURN")){
+					GameData.myTurn=true;
+					MessageTool.getInstance().addMessage("请您落子...");
+					//获取棋子位置并且加入
+					String[] position=content.split("#");
+					int currentX=Integer.parseInt(position[2]);
+					int currentY=Integer.parseInt(position[3]);
+					ChessBoard.cp[ChessBoard.chessCount++] = new ChessPoint(currentX, currentY, (GameData.isBlack)?Color.WHITE:Color.black);
+					ChessBoard.getInstance().repaint();
+				}
 		else if(header.equals("SAY")){
 			MessageTool.getInstance().addMessage("对方说："+content);
 		}
+		//对方异常退出，请重开
+				else if(header.equals("LEAVE")){
+					GameData.gameOver=true;
+					MessageTool.getInstance().addMessage("请点击重来结束本局！");
+					JOptionPane.showConfirmDialog(null,"对方异常退出，请重开！",
+						     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
+					StatusPanel.getInstance().setResetStatusValid();
+					PlayerPanel.getInstance().setEscapeEnabledInvalid();
+					GameData.Reset();
+				}
 
 	}
-}
+	}
