@@ -38,6 +38,7 @@ public class EscapeListener implements ActionListener{
 				PlayerPanel.getInstance().setEscapeEnabledInvalid();
 				StatusPanel.getInstance().setResetStatusValid();
 				GameData.Reset();
+				GameData.hasOpponent = false;
 			}
 			else if(choice==JOptionPane.NO_OPTION){
 				//不做动作

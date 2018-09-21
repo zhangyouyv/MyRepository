@@ -21,7 +21,7 @@ public class SendMessageListener implements ActionListener{
 			JOptionPane.showConfirmDialog(null,"请先开始游戏！",
 				     "没有玩家",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
 		}
-		else if(MessagePanel.getInstance().getSendField().getText().equals("")){
+		else if(MessagePanel.getInstance().getSendField().getText().trim().equals("")){
 			JOptionPane.showConfirmDialog(null,"请不要发送空消息！",
 				     "空消息提示",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
 		}

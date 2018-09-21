@@ -37,6 +37,7 @@ public class Resolver {
 		// System.out.println(message);
 		String header = messageSplit[0];
 		String content = messageSplit[1];
+		System.out.println("消息内容："+header+"------------"+content);
 		//服务器关闭客户端提示
 		if(header.equals("ERROR")){
 			JOptionPane.showConfirmDialog(null,"连接服务器错误，请检查网络",
@@ -57,35 +58,41 @@ public class Resolver {
 		}
 		else if(header.equals("NEWCHALL")){
 			String fromID=content.split("#")[0];
+			if(GameData.hasOpponent == false){
 			int choice=JOptionPane.showConfirmDialog(null,fromID+"向您挑战，是否同意？",
 				     "收到对战请求",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 			//同意对战
 			if(choice==JOptionPane.YES_OPTION){
-				GameData.hasOpponent=true;
-				GameData.opponentID=fromID;
-				IOTool.getInstance().getWriter().println("YESCHALL:"+GameData.myID+"#"+fromID);
-				/*HashMapTool.getInstance().addPlayer(GameData.myID, player);
-				HashMapTool.getInstance().addPlayer(GameData.fromID, player);*/
-				PlayerPanel.getInstance().setEscapeEnabledValid();
+				
+					GameData.hasOpponent=true;
+					GameData.opponentID=fromID;
+					IOTool.getInstance().getWriter().println("YESCHALL:"+GameData.myID+"#"+fromID);
+					PlayerPanel.getInstance().setEscapeEnabledValid();	
+				
+				
 			}
 			//不同意对战
 			else if(choice==JOptionPane.NO_OPTION){
 				IOTool.getInstance().getWriter().println("NOCHALL:"+GameData.myID+"#"+fromID);
 			}
+			}else{
+				IOTool.getInstance().getWriter().println("NOCHALL:"+GameData.myID+"#"+fromID);
 			}
+		}
 		//对方同意对战
 		else if(header.equals("YESCHALL")){
-			GameData.hasOpponent=true;
-			GameData.opponentID=content.split("#")[0];
-			JOptionPane.showConfirmDialog(null,"对方接收了您的挑战！",
-				     "对方接受挑战",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
-			PlayerPanel.getInstance().setEscapeEnabledValid();
+				GameData.hasOpponent=true;
+				GameData.opponentID=content.split("#")[0];
+				JOptionPane.showConfirmDialog(null,"对方接收了您的挑战！",
+					     "对方接受挑战",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
+				PlayerPanel.getInstance().setEscapeEnabledValid();
 		}
 		//对方不同意对战
 		else if(header.equals("NOCHALL")){
 			JOptionPane.showConfirmDialog(null,"对方拒绝了您的挑战！",
 				     "对方拒绝挑战",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
 		}
+		
 		//我方是黑色棋子
 		else if(header.equals("YOUAREBLACK")){
 			GameData.isBlack=true;
@@ -107,10 +114,10 @@ public class Resolver {
 			MessageTool.getInstance().addMessage("请点击重来结束本局！");
 			JOptionPane.showConfirmDialog(null,"你输了",
 				     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
-			GameData.Reset();
 			StatusPanel.getInstance().setResetStatusValid();
 			PlayerPanel.getInstance().setEscapeEnabledInvalid();
-			
+			GameData.Reset();
+			GameData.hasOpponent = false;
 		}
 		//对方发来失败标识，我方胜利
 		else if(header.equals("LOSE")){
@@ -120,32 +127,41 @@ public class Resolver {
 				     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
 			StatusPanel.getInstance().setResetStatusValid();
 			PlayerPanel.getInstance().setEscapeEnabledInvalid();
+			GameData.hasOpponent = false;
 			GameData.Reset();
 		}
 		//轮到我方行动
-				else if(header.equals("YOURTURN")){
-					GameData.myTurn=true;
-					MessageTool.getInstance().addMessage("请您落子...");
-					//获取棋子位置并且加入
-					String[] position=content.split("#");
-					int currentX=Integer.parseInt(position[2]);
-					int currentY=Integer.parseInt(position[3]);
-					ChessBoard.cp[ChessBoard.chessCount++] = new ChessPoint(currentX, currentY, (GameData.isBlack)?Color.WHITE:Color.black);
-					ChessBoard.getInstance().repaint();
-				}
+				
 		else if(header.equals("SAY")){
 			MessageTool.getInstance().addMessage("对方说："+content);
 		}
 		//对方异常退出，请重开
-				else if(header.equals("LEAVE")){
-					GameData.gameOver=true;
-					MessageTool.getInstance().addMessage("请点击重来结束本局！");
-					JOptionPane.showConfirmDialog(null,"对方异常退出，请重开！",
-						     "结果产生",JOptionPane.DEFAULT_OPTION,JOptionPane.DEFAULT_OPTION);
-					StatusPanel.getInstance().setResetStatusValid();
-					PlayerPanel.getInstance().setEscapeEnabledInvalid();
-					GameData.Reset();
-				}
+		else if (header.equals("LEAVE")) {
+			GameData.gameOver = true;
+			MessageTool.getInstance().addMessage("请点击重来结束本局！");
+			JOptionPane.showConfirmDialog(null, "对方异常退出，请重开！", "结果产生", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.DEFAULT_OPTION);
+			StatusPanel.getInstance().setResetStatusValid();
+			PlayerPanel.getInstance().setEscapeEnabledInvalid();
+			GameData.Reset();
+			GameData.hasOpponent = false;
+		} else if (header.equals("REJECT")) {
+			JOptionPane.showConfirmDialog(null, "对方正在游戏，拒绝了您的挑战！", "对方拒绝挑战", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.DEFAULT_OPTION);
+		} else {
+			if (header.equals("YOURTURN")) {
+				
+				GameData.myTurn = true;
+				MessageTool.getInstance().addMessage("请您落子...");
+				// 获取棋子位置并且加入
+				String[] position = content.split("#");
+				int currentX = Integer.parseInt(position[2]);
+				int currentY = Integer.parseInt(position[3]);
+				ChessBoard.cp[ChessBoard.chessCount++] = new ChessPoint(currentX, currentY,
+						(GameData.isBlack) ? Color.WHITE : Color.black);
+				ChessBoard.getInstance().repaint();
+			}
+		}
 
 	}
 	}

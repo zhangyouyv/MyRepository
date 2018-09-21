@@ -43,11 +43,11 @@ public class ListListener extends MouseAdapter {
 						}
 						
 						//不能匹配到正在对战的玩家
-						else 
+						/*else 
 						    if(HashMapTool.getInstance().getPlayer(GameData.chosenOpponentID).getStatus() == true){
 								   JOptionPane.showConfirmDialog(null, "对手正在游戏，不能匹配新的玩家！", "游戏中请勿匹配", JOptionPane.DEFAULT_OPTION,
 										JOptionPane.ERROR_MESSAGE);}
-						
+						*/
 						// 选择
 						else {
 							String message = "CHALL:" + GameData.myID + "#" + opponentID;

@@ -125,7 +125,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 	// 下棋函数
 	public void mousePressed(MouseEvent e) {
 		if (GameData.isConnected == false || GameData.hasOpponent == false || GameData.gameOver
-				|| GameData.myTurn == false) {
+				|| GameData.myTurn == false ) {
 			return;
 		}
 		currentX = (e.getX() - MARGIN + GRID_MARGIN / 2) / GRID_MARGIN; // 坐标规范化，加上网格距离的一半是为了
@@ -137,24 +137,31 @@ public class ChessBoard extends JPanel implements MouseListener {
 		else {
 			cp[chessCount++] = new ChessPoint(currentX, currentY, GameData.myColor);
 			GameData.myTurn = false;
+			if(isWin() != true){
 			IOTool.getInstance().getWriter().println(
 					"YOURTURN:" + GameData.myID + "#" + GameData.opponentID + "#" + currentX + "#" + currentY + "#");
 			System.out.println(
 					"YOURTURN:" + GameData.myID + "#" + GameData.opponentID + "#" + currentX + "#" + currentY + "#");
 			// 发送我方结束和棋子位置，锁定我方落子
+			}else{
+				if (isWin()) {
+					GameData.gameOver = true;
+					// 发送胜利消息
+					IOTool.getInstance().getWriter().println(
+							"YOURTURN:" + GameData.myID + "#" + GameData.opponentID + "#" + currentX + "#" + currentY + "#");
+					IOTool.getInstance().getWriter().println("WIN:" + GameData.myID + "#" + GameData.opponentID);
+					MessageTool.getInstance().addMessage("请点击重来结束本局！");
+					JOptionPane.showConfirmDialog(null, "你赢了！", "胜利", JOptionPane.DEFAULT_OPTION, JOptionPane.DEFAULT_OPTION);
+					// 重来按钮可用
+					StatusPanel.getInstance().setResetStatusValid();
+					PlayerPanel.getInstance().setEscapeEnabledInvalid();
+					GameData.Reset();
+					GameData.hasOpponent = false;
+				}
+			}
 		}
 		repaint();
-		if (isWin()) {
-			GameData.gameOver = true;
-			// 发送胜利消息
-			IOTool.getInstance().getWriter().println("WIN:" + GameData.myID + "#" + GameData.opponentID);
-			MessageTool.getInstance().addMessage("请点击重来结束本局！");
-			JOptionPane.showConfirmDialog(null, "你赢了！", "胜利", JOptionPane.DEFAULT_OPTION, JOptionPane.DEFAULT_OPTION);
-			// 重来按钮可用
-			StatusPanel.getInstance().setResetStatusValid();
-			PlayerPanel.getInstance().setEscapeEnabledInvalid();
-			GameData.Reset();
-		}
+		
 		// currentChessColor = currentChessColor == Color.BLACK ? Color.white :
 		// Color.black; // 反色
 

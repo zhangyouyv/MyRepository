@@ -49,7 +49,7 @@ public class LoginListener implements ActionListener {
 				StatusPanel.getInstance().setStatusToOn();
 				
 				// ≤‚ ‘∑¢ÀÕ
-				GameData.myID=String.valueOf(this.hashCode());
+				GameData.myID=String.valueOf(System.currentTimeMillis());
 //				ClientFrame.getInstance().setTitle(GameData.myID);
 				StatusPanel.getInstance().setID(GameData.myID);
 				IOTool.getInstance().getWriter().println("HELLO:" + GameData.myID);

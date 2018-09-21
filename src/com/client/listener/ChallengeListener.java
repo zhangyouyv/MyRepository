@@ -22,10 +22,6 @@ public class ChallengeListener implements ActionListener {
 					JOptionPane.DEFAULT_OPTION);
 		} 
 		else {
-			
-		     		
-				
-			
 			//选择对手提示
 			if (GameData.chosenOpponentID.equals("")) {
 				JOptionPane.showConfirmDialog(null, "请先选择一个对手再挑战！", "选择对手提示", JOptionPane.DEFAULT_OPTION,
@@ -33,14 +29,14 @@ public class ChallengeListener implements ActionListener {
 			} 
 			//不能匹配到正在对战的玩家
 			
-			    if(HashMapTool.getInstance().getPlayer(GameData.chosenOpponentID).getStatus() == true){
+			  /*  if(HashMapTool.getInstance().getPlayer(GameData.chosenOpponentID).getStatus() == true){
 			   JOptionPane.showConfirmDialog(null, "对手正在游戏，不能匹配新的玩家！", "游戏中请勿匹配", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.ERROR_MESSAGE);}
+					JOptionPane.ERROR_MESSAGE);}*/
 			else {
 				//不能和自己对战提示
 				if(GameData.chosenOpponentID.contains("(")){
 				if (GameData.chosenOpponentID.equals(GameData.myID) | GameData.chosenOpponentID.substring(0, GameData.chosenOpponentID.indexOf("(")).equals(GameData.myID)) {
-					System.out.println(GameData.chosenOpponentID);
+					//System.out.println(GameData.chosenOpponentID);
 					JOptionPane.showConfirmDialog(null, "不能和自己对战！", "对战错误", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.ERROR_MESSAGE);
 				} 
@@ -50,7 +46,6 @@ public class ChallengeListener implements ActionListener {
 					JOptionPane.showConfirmDialog(null, "当前正在游戏，不能匹配新的玩家！", "游戏中请勿匹配", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.ERROR_MESSAGE);
 				}
-				
 				else {
 					String message = "CHALL:" + GameData.myID + "#" + GameData.chosenOpponentID;
 					// System.out.println(message);

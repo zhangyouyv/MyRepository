@@ -74,12 +74,6 @@ public class Resolver {
 				refusePlayerToBattle(fromID, toID);
 				flushPlayerList();
 			}
-			else if(header.equals("YOURTURN")){
-				String[] IDSet=content.split("#");
-				String toID=IDSet[1];
-				sendTurn(content, toID);
-				flushPlayerList();
-			}
 			else if(header.equals("WIN")){
 				String[] IDSet=content.split("#");
 				String fromID=IDSet[0];
@@ -100,6 +94,12 @@ public class Resolver {
 				HashMapTool.getInstance().getPlayer(toID).releaseBusy();
 				flushPlayerList();
 			}
+			else if(header.equals("YOURTURN")){
+				String[] IDSet=content.split("#");
+				String toID=IDSet[1];
+				sendTurn(content, toID);
+				flushPlayerList();
+			}
 			else if(header.equals("SAY")){
 				String[] IDSet=content.split("#");
 				String toID=IDSet[1];
@@ -110,6 +110,12 @@ public class Resolver {
 				String[] IDSet=content.split("#");
 				String toID=IDSet[1];
 				sendLeave(content.split("#")[2], toID);
+				flushPlayerList();
+			}
+			else if(header.equals("REJECT")){
+				String[] IDSet=content.split("#");
+				String toID=IDSet[1];
+				sendReject(content.split("#")[2], toID);
 				flushPlayerList();
 			}
 			
@@ -208,6 +214,10 @@ public class Resolver {
 			HashMapTool.getInstance().getPlayer(toID).getWriter().println("LEAVE:"+message);
 			ListTool.getInstance().dropPlayer(GameData.myID);
 		}
+		//通知toID对方异常退出
+				public void sendReject(String message,String toID){
+					HashMapTool.getInstance().getPlayer(toID).getWriter().println("REJECT:"+message);
+				}
 	//消息发送
 	public void sendMessage(String message,String toID){
 		HashMapTool.getInstance().getPlayer(toID).getWriter().println("SAY:"+message);

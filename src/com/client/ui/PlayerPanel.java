@@ -31,7 +31,7 @@ public class PlayerPanel extends JPanel {
 	
 	private JButton challengeBtn=new JButton("邀请玩家对战");
 	private JButton escapeBtn=new JButton("不下了");
-	private JButton flushBtn=new JButton("刷新");
+	//private JButton flushBtn=new JButton("刷新");
 	private JPanel buttonBar=new JPanel();
 	
 	public static PlayerPanel getInstance() {
@@ -55,11 +55,11 @@ public class PlayerPanel extends JPanel {
 		buttonBar.setLayout(new BorderLayout());
 		buttonBar.add(challengeBtn,BorderLayout.CENTER);
 		buttonBar.add(escapeBtn,BorderLayout.EAST);
-		buttonBar.add(flushBtn,BorderLayout.WEST);
+		//buttonBar.add(flushBtn,BorderLayout.WEST);
 		challengeBtn.addActionListener(new ChallengeListener());
 		escapeBtn.addActionListener(new EscapeListener());
 		escapeBtn.setEnabled(false);
-		flushBtn.addActionListener(new FlushListener());
+		//flushBtn.addActionListener(new FlushListener());
 	}
 	
 	public void setEscapeEnabledInvalid(){

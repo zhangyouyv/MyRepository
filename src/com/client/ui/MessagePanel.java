@@ -1,6 +1,7 @@
 package com.client.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -8,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import com.client.listener.SendMessageListener;
 import com.client.tools.MessageTool;
@@ -25,7 +25,7 @@ public class MessagePanel extends JPanel {
 	
 	private JScrollPane messagePane=new JScrollPane();
 	private JTextArea messageArea=MessageTool.getMessageArea();
-	private JTextField sendField=new JTextField(33);
+	private JTextArea sendField=new JTextArea();
 	private JButton sendBtn=new JButton("发送");
 	private JPanel sendPanel=new JPanel(new FlowLayout());
 	//单例模式
@@ -35,7 +35,7 @@ public class MessagePanel extends JPanel {
 		}
 		return mp;
 	}
-	public JTextField getSendField(){
+	public JTextArea getSendField(){
 		return sendField;
 	}
 	private MessagePanel(){
@@ -45,8 +45,13 @@ public class MessagePanel extends JPanel {
 		sendPanel.add(sendBtn);
 		add(messagePane,BorderLayout.CENTER);
 		add(sendPanel,BorderLayout.SOUTH);
+		messageArea.setLineWrap(true);
 		messagePane.setViewportView(messageArea);
+		messagePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		messagePane.setSize(200,100);
 		sendField.setSize(200,100);
+		sendField.setBorder (BorderFactory.createLineBorder(Color.gray,2));
+		sendField.setLineWrap(true);
 		sendBtn.addActionListener(new SendMessageListener());
 	}
 	

@@ -51,7 +51,7 @@ public class ClientFrame extends JFrame {
 			     int   option=   JOptionPane.showConfirmDialog( 
 			    		 ClientFrame.this, "确定退出游戏！ ", "提示 ",JOptionPane.YES_NO_OPTION); 
 			      if(option==JOptionPane.YES_OPTION) 
-			         if(e.getWindow()   ==   ClientFrame.this) 
+			         if(e.getWindow()   ==   ClientFrame.this && GameData.myID != null && GameData.opponentID != null) 
 			         { //获取对战map
 			        	 IOTool.getInstance().getWriter().println("LEAVE:"+GameData.myID+"#"+GameData.opponentID+"#"+"1");
 			         System.exit(0); 
